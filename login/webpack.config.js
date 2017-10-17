@@ -13,6 +13,10 @@ module.exports = {
     },
                 // loader  ( for having webpack work with babel )
     module: {
+        loaders: [
+            { test: /\.css$/, loader: "style-loader!css-loader" },
+            // ...
+          ],
         rules: [{
             loader: 'babel-loader',
             test: /\.js$/,   // <- only grabs .js files

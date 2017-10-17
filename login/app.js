@@ -15,7 +15,6 @@ const app = express();
 const port = 3000;
 
 const index = require('./routes/index');
-const Product = require("./models/post.js");
 
 // View Engine
 // app.engine('handlebars', exphbs({defaultLayout:'main'}));
@@ -70,9 +69,6 @@ app.use(expressValidator({
     };
   }
 }));
-
-require("./routes/api-routes.js")(app);
-require("./routes/html-routes.js")(app);
 
 db = mongoose.createConnection('mongodb://localhost/yumyumnasty');
 db.on("error", function(error){

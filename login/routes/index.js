@@ -2,15 +2,14 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-let Product = require("../models/post.js");
-let mongoose = require("mongoose");
-let fashionApp = require("../public/fashionapp.html");
+const app = require('express');
 
 let User = require('../models/user');
 
 // Home Page - Dashboard
 router.get('/', ensureAuthenticated, (req, res, next) => {
-  res.render(fashionApp);
+  redirect()
+  res.redirect('http://localhost:8080');
 });
 
 // Login Form
@@ -114,5 +113,17 @@ function ensureAuthenticated(req, res, next){
     res.redirect('/login');
   }
 }
+
+function redirect(){
+const { fork } = require('child_process');
+
+const forked = fork('../fashionApp/');
+
+forked.on('message', (msg) => {
+  console.log('Message from child', msg);
+});
+
+forked.send({ hello: 'world' });
+};
 
 module.exports = router;
